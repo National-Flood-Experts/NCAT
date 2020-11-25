@@ -1,0 +1,11 @@
+{
+  "name": "ncat",
+  "version": "1.0.0",
+  "description": "A JavaScript wrapper for NGS’s Coordinate Conversion and Transformation Tool (NCAT) API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "National Flood Experts",
+  "license": "MIT"
+}
