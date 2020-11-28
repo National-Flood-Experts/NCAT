@@ -2,10 +2,29 @@
   "name": "ncat",
   "version": "1.0.0",
   "description": "A JavaScript wrapper for NGS’s Coordinate Conversion and Transformation Tool (NCAT) API.",
-  "main": "index.js",
+  "main": "dist/ncat.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:umd": "cross-env FILE_NAME=ncat webpack",
+    "build:umd:min": "cross-env NODE_ENV=production npm run build:umd",
+    "build:commonjs": "babel src --out-dir lib",
+    "clean": "rimraf lib dist",
+    "build": "npm run clean && npm run build:commonjs && npm run build:umd && npm run build:umd:min",
+    "test": "jest"
   },
   "author": "National Flood Experts",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "babel-jest": "^26.6.3",
+    "cross-env": "^7.0.2",
+    "jest": "^26.6.3",
+    "rimraf": "^3.0.2",
+    "webpack": "^5.8.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.0"
+  }
 }
