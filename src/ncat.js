@@ -1,7 +1,10 @@
 import axios from 'axios';
-import LLHSchema from './schemas/LLH';
 import validate from './validate';
 import utils from './utils';
+
+// Schemas
+import LLHSchema from './schemas/LLH';
+import SPCSchema from './schemas/SPC';
 
 let NCATAxiosInstance = null;
 
@@ -19,21 +22,36 @@ function getNCATAxiosInstance() {
     return NCATAxiosInstance;
 }
 
-function LLHServiceRequest(queryParameters) {
-    validate(queryParameters, LLHSchema);
-    let queryString = utils.buildQueryString(queryParameters);
+function makeServiceRequest(schema, endpoint) {
+    return (parameters) => {
+        validate(parameters, schema);
+        let queryString = utils.buildQueryString(parameters);
 
-    return getNCATAxiosInstance()
-        .get('llh' + queryString)
-        .then(response => {
-            let data = response.data;
+        return getNCATAxiosInstance()
+            .get(endpoint + queryString)
+            .then(response => {
+                let data = response.data;
 
-            if ('error' in data) {
-                return Promise.reject(data.error);
-            }
+                if ('error' in data) {
+                    return Promise.reject(data.error);
+                }
 
-            return data;
-        });
+                return data;
+            });
+        }
 }
 
-export default { LLHServiceRequest }
+function LLHServiceRequest(queryParameters) {
+    let serviceRequest = makeServiceRequest(LLHSchema, 'llh');
+    return serviceRequest(queryParameters);
+}
+
+function SPCServiceRequest(queryParameters) {
+    let serviceRequest = makeServiceRequest(SPCSchema, 'spc');
+    return serviceRequest(queryParameters);
+}
+
+export default {
+    LLHServiceRequest,
+    SPCServiceRequest
+}
