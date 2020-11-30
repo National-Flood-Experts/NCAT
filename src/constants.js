@@ -33,3 +33,9 @@ export const VERTICAL_DATUM = [
     'prvd02',
     'asvd02'
 ];
+
+export const UNITS = [
+    'm',
+    'usft',
+    'ift'
+];
