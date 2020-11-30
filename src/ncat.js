@@ -5,6 +5,7 @@ import utils from './utils';
 // Schemas
 import LLHSchema from './schemas/LLH';
 import SPCSchema from './schemas/SPC';
+import USNGSchema from './schemas/USNG';
 import UTMSchema from './schemas/UTM';
 import XYZSchema from './schemas/XYZ';
 
@@ -63,9 +64,15 @@ function XYZServiceRequest(queryParameters) {
     return serviceRequest(queryParameters);
 }
 
+function USNGServiceRequest(queryParameters) {
+    let serviceRequest = makeServiceRequest(USNGSchema, 'usng');
+    return serviceRequest(queryParameters);
+}
+
 export default {
     LLHServiceRequest,
     SPCServiceRequest,
     UTMServiceRequest,
-    XYZServiceRequest
+    XYZServiceRequest,
+    USNGServiceRequest
 }
