@@ -5,10 +5,10 @@
 import ncat from '../src/ncat';
 import { MissingRequiredQueryParameter, InvalidQueryParameter } from '../src/errors';
 
-describe('Latitude-longitude-height service', () => {
+describe('Latitude-longitude-height Service', () => {
     const VALID_REQUEST = {
-        lat: '40.0',
-        lon: '-80.0',
+        lat: 40.0,
+        lon: -80.0,
         inDatum: 'nad83(1986)',
         outDatum: 'nad83(2011)'
     };
@@ -46,6 +46,52 @@ describe('Latitude-longitude-height service', () => {
 
         return ncat.LLHServiceRequest(currentRequest).catch(error => {
             expect(error).toBe('Invalid latitude');
+        });
+    });
+});
+
+describe('SPC Service', () => {
+    const VALID_REQUEST = {
+        spcZone: 2402,
+        inDatum: 'nad83(2011)',
+        outDatum: 'nad83(NSRS2007)',
+        northing: '173099.419',
+        easting: '503626.812'
+    };
+
+    it('cannot make a request without the required fields', () => {
+        Object.keys(VALID_REQUEST)
+            .forEach(parameter => {
+                let currentRequest = { ...VALID_REQUEST };
+                delete currentRequest[parameter];
+
+                expect(() => ncat.SPCServiceRequest(currentRequest))
+                    .toThrowError(MissingRequiredQueryParameter);
+            });
+    });
+
+    it('can validate raise exceptions for non-required fields', () => {
+        let currentRequest = { ...VALID_REQUEST };
+        currentRequest['eht'] = 'not a valid float';
+
+        expect(() => ncat.SPCServiceRequest(currentRequest))
+            .toThrowError(InvalidQueryParameter);
+    });
+
+    it('should return a valid response if the required fields are included', () => {
+        return ncat.SPCServiceRequest(VALID_REQUEST).then(data => {
+            expect(data).toHaveProperty('ID');
+        });
+    });
+
+    it ('should return a rejected promise if the request is bad', () => {
+        const invalidEasting = -800000000000000;
+
+        let currentRequest = { ...VALID_REQUEST };
+        currentRequest['easting'] = invalidEasting;
+
+        return ncat.SPCServiceRequest(currentRequest).catch(error => {
+            expect(error).toBe('Invalid easting coordinate');
         });
     });
 });
