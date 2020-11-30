@@ -1,52 +1,48 @@
-import { HORIZONTAL_DATUM, VERTICAL_DATUM, UNITS } from '../constants.js';
+import validators from './validators';
 
 export default {
     northing: {
         required: true,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.northing
     },
     easting: {
         required: true,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.easting
     },
     units: {
         required: false,
-        validator: value => UNITS.includes(value.toLowerCase())
+        validator: validators.units
     },
     inDatum: {
         required: true,
-        validator: value => HORIZONTAL_DATUM.includes(value.toLowerCase())
+        validator: validators.inDatum
     },
     outDatum: {
         required: true,
-        validator: value => HORIZONTAL_DATUM.includes(value.toLowerCase())
+        validator: validators.outDatum
     },
     spcZone: {
         required: true,
-        validator: value => {
-            return parseInt(value) === Number(value) && value.toString().length == 4
-        }
+        validator: validators.spcZone
     },
     utmZone: {
         required: false,
-        validator: value => {
-            return parseInt(value) === Number(value) && value.toString().length == 4
-        }
+        validator: validators.utmZone
     },
     eht: {
         required: false,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.eht
     },
     inVertDatum: {
         required: false,
-        validator: value => VERTICAL_DATUM.includes(value.toLowerCase())
+        validator: validators.inVertDatum
     },
     outVertDatum: {
         required: false,
-        validator: value => VERTICAL_DATUM.includes(value.toLowerCase())
+        validator: validators.outVertDatum
     },
     orthoHt: {
         required: false,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.orthoHt
     }
 }

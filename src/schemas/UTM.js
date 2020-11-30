@@ -1,65 +1,62 @@
-import { HORIZONTAL_DATUM, VERTICAL_DATUM, UNITS } from '../constants.js';
+import validators from './validators';
 
 export default {
     northing: {
         required: true,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.northing
     },
     easting: {
         required: true,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.easting
     },
     utmZone: {
         required: true,
-        validator: value => {
-            return parseInt(value) === Number(value) && value.toString().length === 2
-        }
+        validator: validators.utmZone
     },
     hemi: {
         required: false,
-        validator: value => HEMISPEHERE.includes(value.toLowerCase())
+        validator: validators.hemi
     },
     inDatum: {
         required: true,
-        validator: value => HORIZONTAL_DATUM.includes(value.toLowerCase())
+        validator: validators.inDatum
     },
     outDatum: {
         required: true,
-        validator: value => HORIZONTAL_DATUM.includes(value.toLowerCase())
+        validator: validators.outDatum
     },
     a: {
         required: false,
-        validator: value => parseFloat(value) == Number(value)
+        validator: validators.a
     },
     invf: {
         required: false,
-        validator: value => parseFloat(value) == Number(value)
+        validator: validators.invf
     },
     spcZone: {
         /*
         ** The documentation says that spcZone is a required field for UTM Service request,
-        ** yet requests can be made without it. Because of this, the field is not required.
+        ** yet requests can be made without it. Their first example even shows a request
+        ** being made without a spcZone specified. Because of this, the field is not required here.
         ** See the docs for more information: https://www.ngs.noaa.gov/web_services/ncat/utm-service.shtml
         */
         required: false,
-        validator: value => {
-            return parseInt(value) === Number(value) && value.toString().length === 4
-        }
+        validator: validators.spcZone
     },
     eht: {
         required: false,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.eht
     },
     inVertDatum: {
         required: false,
-        validator: value => VERTICAL_DATUM.includes(value.toLowerCase())
+        validator: validators.inVertDatum
     },
     outVertDatum: {
         required: false,
-        validator: value => VERTICAL_DATUM.includes(value.toLowerCase())
+        validator: validators.outVertDatum
     },
     orthoHt: {
         required: false,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.orthoHt
     }
 }

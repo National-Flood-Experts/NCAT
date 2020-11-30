@@ -1,56 +1,52 @@
-import { HORIZONTAL_DATUM, VERTICAL_DATUM } from '../constants.js';
+import validators from './validators';
 
 export default {
     lat: {
         required: true,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.lat
     },
     lon: {
         required: true,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.lon
     },
     eht: {
         required: false,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.eht
     },
     inDatum: {
         required: true,
-        validator: value => HORIZONTAL_DATUM.includes(value.toLowerCase())
+        validator: validators.inDatum
     },
     outDatum: {
         required: true,
-        validator: value => HORIZONTAL_DATUM.includes(value.toLowerCase())
+        validator: validators.outDatum
     },
     spcZone: {
         required: false,
-        validator: value => {
-            return parseInt(value) == Number(value) && value.toString().length == 4
-        }
+        validator: validators.spcZone
     },
     utmZone: {
         required: false,
-        validator: value => {
-            return parseInt(value) == Number(value) && value.toString().length == 4
-        }
+        validator: validators.utmZone
     },
     a: {
         required: false,
-        validator: value => parseFloat(value) == Number(value)
+        validator: validators.a
     },
     invf: {
         required: false,
-        validator: value => parseFloat(value) == Number(value)
+        validator: validators.invf
     },
     inVertDatum: {
         required: false,
-        validator: value => VERTICAL_DATUM.includes(value.toLowerCase())
+        validator: validators.inVertDatum
     },
     outVertDatum: {
         required: false,
-        validator: value => VERTICAL_DATUM.includes(value.toLowerCase())
+        validator: validators.outVertDatum
     },
     orthoHt: {
         required: false,
-        validator: value => parseFloat(value) == Number(value),
+        validator: validators.orthoHt
     }
 }
