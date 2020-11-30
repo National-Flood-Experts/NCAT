@@ -39,3 +39,8 @@ export const UNITS = [
     'usft',
     'ift'
 ];
+
+export const HEMISPHERE = [
+    'n',
+    's'
+];
