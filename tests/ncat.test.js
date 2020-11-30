@@ -5,7 +5,7 @@
 import ncat from '../src/ncat';
 import { MissingRequiredQueryParameter, InvalidQueryParameter } from '../src/errors';
 
-describe('Latitude-longitude-height Service', () => {
+describe('LLH Service', () => {
     const VALID_REQUEST = {
         lat: 40.0,
         lon: -80.0,
@@ -70,7 +70,7 @@ describe('SPC Service', () => {
             });
     });
 
-    it('can validate raise exceptions for non-required fields', () => {
+    it('can raise exceptions for non-required fields', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['eht'] = 'not a valid float';
 
@@ -116,7 +116,7 @@ describe('UTM Service', () => {
             });
     });
 
-    it('can validate raise exceptions for non-required fields', () => {
+    it('can raise exceptions for non-required fields', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['eht'] = 'not a valid float';
 
@@ -138,6 +138,50 @@ describe('UTM Service', () => {
 
         return ncat.UTMServiceRequest(currentRequest).catch(error => {
             expect(error).toBe('Invalid easting coordinate');
+        });
+    });
+});
+
+describe('XYZ Service', () => {
+    const VALID_REQUEST = {
+        inDatum: 'NAD83(2011)',
+        outDatum: 'NAD83(NSRS2007)',
+        x: -217687.279,
+        y: -5069012.406,
+        z: 3852223.048
+    };
+
+    /*
+    ** The XYZ Service currently does not have a test to check for required parameters
+    ** because the validation is conditional (see the note in src/schemas/XYZ.js).
+    ** The validation for XYZ service is complex enough where the test can't even be trusted.
+    ** For the purposes of this library, all of the required fields listed in the docs
+    ** will be considered necessary despite the fact that requests to the XYZ service
+    ** can be made without out required parameters.
+    */
+
+    it('can raise exceptions for non-required fields', () => {
+        let currentRequest = { ...VALID_REQUEST };
+        currentRequest['a'] = 'not a valid float';
+
+        expect(() => ncat.XYZServiceRequest(currentRequest))
+            .toThrowError(InvalidQueryParameter);
+    });
+
+    it('should return a valid response if the required fields are included', () => {
+        return ncat.XYZServiceRequest(VALID_REQUEST).then(data => {
+            expect(data).toHaveProperty('ID');
+        });
+    });
+
+    it ('should return a rejected promise if the request is bad', () => {
+        const invalidXCoordinate = -800000000000000;
+
+        let currentRequest = { ...VALID_REQUEST };
+        currentRequest['x'] = invalidXCoordinate;
+
+        return ncat.XYZServiceRequest(currentRequest).catch(error => {
+            expect(error).toBe('Invalid x coordinate');
         });
     });
 });
