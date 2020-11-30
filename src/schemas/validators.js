@@ -1,4 +1,4 @@
-import { HORIZONTAL_DATUM, VERTICAL_DATUM, UNITS, HEMISPEHERE } from '../constants.js';
+import { HORIZONTAL_DATUM, VERTICAL_DATUM, UNITS, HEMISPHERE } from '../constants.js';
 
 export default {
     a: value => parseFloat(value) == Number(value),
