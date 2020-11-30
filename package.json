@@ -2,7 +2,7 @@
   "name": "ncat",
   "version": "1.0.0",
   "description": "A JavaScript wrapper for NGS’s Coordinate Conversion and Transformation Tool (NCAT) API.",
-  "main": "dist/ncat.js",
+  "main": "lib/ncat.js",
   "scripts": {
     "build:umd": "cross-env FILE_NAME=ncat webpack",
     "build:umd:min": "cross-env NODE_ENV=production npm run build:umd",
