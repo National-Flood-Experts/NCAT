@@ -185,3 +185,43 @@ describe('XYZ Service', () => {
         });
     });
 });
+
+describe('USNG Service', () => {
+    const VALID_REQUEST = {
+        usng: '15SWB4788338641',
+        inDatum: 'NAD83(2011)',
+        outDatum: 'NAD83(NSRS2007)'
+    };
+
+    /*
+    ** The USNG Service currently does not have a test to check for required parameters
+    ** because the validation is conditional. See the notes above for the XYZ service tests
+    ** for more information on why the required parameters test for the USNG service is
+    ** not here.
+    */
+
+    it('can raise exceptions for non-required fields', () => {
+        let currentRequest = { ...VALID_REQUEST };
+        currentRequest['eht'] = 'not a valid float';
+
+        expect(() => ncat.USNGServiceRequest(currentRequest))
+            .toThrowError(InvalidQueryParameter);
+    });
+
+    it('should return a valid response if the required fields are included', () => {
+        return ncat.USNGServiceRequest(VALID_REQUEST).then(data => {
+            expect(data).toHaveProperty('ID');
+        });
+    });
+
+    it ('should return a rejected promise if the request is bad', () => {
+        const invalidInverseFlattening = -800000000000000;
+
+        let currentRequest = { ...VALID_REQUEST };
+        currentRequest['invf'] = invalidInverseFlattening;
+
+        return ncat.USNGServiceRequest(currentRequest).catch(error => {
+            expect(error).toBe('Invalid inverse flattening');
+        });
+    });
+});
