@@ -23,11 +23,15 @@ export default {
     },
     spcZone: {
         required: false,
-        validator: value => parseInt(value) == Number(value) && value.length === 4
+        validator: value => {
+            return parseInt(value) == Number(value) && value.toString().length == 4
+        }
     },
     utmZone: {
         required: false,
-        validator: value => parseInt(value) == Number(value) && value.length === 4
+        validator: value => {
+            return parseInt(value) == Number(value) && value.toString().length == 4
+        }
     },
     a: {
         required: false,
@@ -41,7 +45,7 @@ export default {
         required: false,
         validator: value => VERTICAL_DATUM.includes(value.toLowerCase())
     },
-    outVerDatum: {
+    outVertDatum: {
         required: false,
         validator: value => VERTICAL_DATUM.includes(value.toLowerCase())
     },
