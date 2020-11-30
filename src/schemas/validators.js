@@ -16,6 +16,7 @@ export default {
     outVertDatum: value => VERTICAL_DATUM.includes(value.toLowerCase()),
     spcZone: value => { return parseInt(value) === Number(value) && value.toString().length === 4 },
     units: value => UNITS.includes(value.toLowerCase()),
+    usng: value => /^\d+[a-zA-Z]{3}\d+$/.test(value),
     utmZone: value => { return parseInt(value) === Number(value) && value.toString().length === 2 },
     x: value => parseFloat(value) == Number(value),
     y: value => parseFloat(value) == Number(value),
