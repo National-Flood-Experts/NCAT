@@ -44,35 +44,35 @@ function makeServiceRequest(schema, endpoint) {
         }
 }
 
-function LLHServiceRequest(queryParameters) {
+const LLH = function LLHServiceRequest(queryParameters) {
     let serviceRequest = makeServiceRequest(LLHSchema, 'llh');
     return serviceRequest(queryParameters);
 }
 
-function SPCServiceRequest(queryParameters) {
+const SPC = function SPCServiceRequest(queryParameters) {
     let serviceRequest = makeServiceRequest(SPCSchema, 'spc');
     return serviceRequest(queryParameters);
 }
 
-function UTMServiceRequest(queryParameters) {
+const UTM = function UTMServiceRequest(queryParameters) {
     let serviceRequest = makeServiceRequest(UTMSchema, 'utm');
     return serviceRequest(queryParameters);
 }
 
-function XYZServiceRequest(queryParameters) {
+const XYZ = function XYZServiceRequest(queryParameters) {
     let serviceRequest = makeServiceRequest(XYZSchema, 'xyz');
     return serviceRequest(queryParameters);
 }
 
-function USNGServiceRequest(queryParameters) {
+const USNG = function USNGServiceRequest(queryParameters) {
     let serviceRequest = makeServiceRequest(USNGSchema, 'usng');
     return serviceRequest(queryParameters);
 }
 
 export default {
-    LLHServiceRequest,
-    SPCServiceRequest,
-    UTMServiceRequest,
-    XYZServiceRequest,
-    USNGServiceRequest
+    LLH,
+    SPC,
+    UTM,
+    XYZ,
+    USNG
 }

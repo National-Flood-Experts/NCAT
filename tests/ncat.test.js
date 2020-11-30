@@ -19,7 +19,7 @@ describe('LLH Service', () => {
                 let currentRequest = { ...VALID_REQUEST };
                 delete currentRequest[parameter];
 
-                expect(() => ncat.LLHServiceRequest(currentRequest))
+                expect(() => ncat.LLH(currentRequest))
                     .toThrowError(MissingRequiredQueryParameter);
             });
     });
@@ -28,12 +28,12 @@ describe('LLH Service', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['eht'] = 'not a valid float';
 
-        expect(() => ncat.LLHServiceRequest(currentRequest))
+        expect(() => ncat.LLH(currentRequest))
             .toThrowError(InvalidQueryParameter);
     });
 
     it('should return a valid response if the required fields are included', () => {
-        return ncat.LLHServiceRequest(VALID_REQUEST).then(data => {
+        return ncat.LLH(VALID_REQUEST).then(data => {
             expect(data).toHaveProperty('ID');
         });
     });
@@ -44,7 +44,7 @@ describe('LLH Service', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['lat'] = invalidLatitude;
 
-        return ncat.LLHServiceRequest(currentRequest).catch(error => {
+        return ncat.LLH(currentRequest).catch(error => {
             expect(error).toBe('Invalid latitude');
         });
     });
@@ -65,7 +65,7 @@ describe('SPC Service', () => {
                 let currentRequest = { ...VALID_REQUEST };
                 delete currentRequest[parameter];
 
-                expect(() => ncat.SPCServiceRequest(currentRequest))
+                expect(() => ncat.SPC(currentRequest))
                     .toThrowError(MissingRequiredQueryParameter);
             });
     });
@@ -74,12 +74,12 @@ describe('SPC Service', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['eht'] = 'not a valid float';
 
-        expect(() => ncat.SPCServiceRequest(currentRequest))
+        expect(() => ncat.SPC(currentRequest))
             .toThrowError(InvalidQueryParameter);
     });
 
     it('should return a valid response if the required fields are included', () => {
-        return ncat.SPCServiceRequest(VALID_REQUEST).then(data => {
+        return ncat.SPC(VALID_REQUEST).then(data => {
             expect(data).toHaveProperty('ID');
         });
     });
@@ -90,7 +90,7 @@ describe('SPC Service', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['easting'] = invalidEasting;
 
-        return ncat.SPCServiceRequest(currentRequest).catch(error => {
+        return ncat.SPC(currentRequest).catch(error => {
             expect(error).toBe('Invalid easting coordinate');
         });
     });
@@ -111,7 +111,7 @@ describe('UTM Service', () => {
                 let currentRequest = { ...VALID_REQUEST };
                 delete currentRequest[parameter];
 
-                expect(() => ncat.UTMServiceRequest(currentRequest))
+                expect(() => ncat.UTM(currentRequest))
                     .toThrowError(MissingRequiredQueryParameter);
             });
     });
@@ -120,12 +120,12 @@ describe('UTM Service', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['eht'] = 'not a valid float';
 
-        expect(() => ncat.UTMServiceRequest(currentRequest))
+        expect(() => ncat.UTM(currentRequest))
             .toThrowError(InvalidQueryParameter);
     });
 
     it('should return a valid response if the required fields are included', () => {
-        return ncat.UTMServiceRequest(VALID_REQUEST).then(data => {
+        return ncat.UTM(VALID_REQUEST).then(data => {
             expect(data).toHaveProperty('ID');
         });
     });
@@ -136,7 +136,7 @@ describe('UTM Service', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['easting'] = invalidEasting;
 
-        return ncat.UTMServiceRequest(currentRequest).catch(error => {
+        return ncat.UTM(currentRequest).catch(error => {
             expect(error).toBe('Invalid easting coordinate');
         });
     });
@@ -164,12 +164,12 @@ describe('XYZ Service', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['a'] = 'not a valid float';
 
-        expect(() => ncat.XYZServiceRequest(currentRequest))
+        expect(() => ncat.XYZ(currentRequest))
             .toThrowError(InvalidQueryParameter);
     });
 
     it('should return a valid response if the required fields are included', () => {
-        return ncat.XYZServiceRequest(VALID_REQUEST).then(data => {
+        return ncat.XYZ(VALID_REQUEST).then(data => {
             expect(data).toHaveProperty('ID');
         });
     });
@@ -180,7 +180,7 @@ describe('XYZ Service', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['x'] = invalidXCoordinate;
 
-        return ncat.XYZServiceRequest(currentRequest).catch(error => {
+        return ncat.XYZ(currentRequest).catch(error => {
             expect(error).toBe('Invalid x coordinate');
         });
     });
@@ -204,12 +204,12 @@ describe('USNG Service', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['eht'] = 'not a valid float';
 
-        expect(() => ncat.USNGServiceRequest(currentRequest))
+        expect(() => ncat.USNG(currentRequest))
             .toThrowError(InvalidQueryParameter);
     });
 
     it('should return a valid response if the required fields are included', () => {
-        return ncat.USNGServiceRequest(VALID_REQUEST).then(data => {
+        return ncat.USNG(VALID_REQUEST).then(data => {
             expect(data).toHaveProperty('ID');
         });
     });
@@ -220,7 +220,7 @@ describe('USNG Service', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['invf'] = invalidInverseFlattening;
 
-        return ncat.USNGServiceRequest(currentRequest).catch(error => {
+        return ncat.USNG(currentRequest).catch(error => {
             expect(error).toBe('Invalid inverse flattening');
         });
     });
