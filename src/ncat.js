@@ -1,10 +1,16 @@
 import axios from 'axios';
-
-const BASE_URL = "https://geodesy.noaa.gov/api/ncat/";
+import LLHSchema from './schemas/LLH';
+import validate from './validate';
 
 class NCAT {
-    static add(a, b) {
-        return a + b;
+    static axios = axios.create({
+        baseURL: "https://geodesy.noaa.gov/api/ncat/",
+        responseType: 'json',
+        withCredentials: false
+    });
+
+    static llhServiceRequest(queryParameters) {
+        validate(queryParameters, LLHSchema);
     }
 }
 
