@@ -17,4 +17,7 @@ export default {
     spcZone: value => { return parseInt(value) === Number(value) && value.toString().length === 4 },
     units: value => UNITS.includes(value.toLowerCase()),
     utmZone: value => { return parseInt(value) === Number(value) && value.toString().length === 2 },
+    x: value => parseFloat(value) == Number(value),
+    y: value => parseFloat(value) == Number(value),
+    z: value => parseFloat(value) == Number(value),
 }
