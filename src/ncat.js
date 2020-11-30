@@ -5,6 +5,7 @@ import utils from './utils';
 // Schemas
 import LLHSchema from './schemas/LLH';
 import SPCSchema from './schemas/SPC';
+import UTMSchema from './schemas/UTM';
 
 let NCATAxiosInstance = null;
 
@@ -51,7 +52,13 @@ function SPCServiceRequest(queryParameters) {
     return serviceRequest(queryParameters);
 }
 
+function UTMServiceRequest(queryParameters) {
+    let serviceRequest = makeServiceRequest(UTMSchema, 'utm');
+    return serviceRequest(queryParameters);
+}
+
 export default {
     LLHServiceRequest,
-    SPCServiceRequest
+    SPCServiceRequest,
+    UTMServiceRequest
 }
