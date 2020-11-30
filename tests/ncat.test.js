@@ -95,3 +95,49 @@ describe('SPC Service', () => {
         });
     });
 });
+
+describe('UTM Service', () => {
+    const VALID_REQUEST = {
+        inDatum: 'NAD83(2011)',
+        outDatum: 'NAD83(NSRS2007)',
+        utmZone: 15,
+        northing: 4138641.144,
+        easting: 547883.655
+    };
+
+    it('cannot make a request without the required fields', () => {
+        Object.keys(VALID_REQUEST)
+            .forEach(parameter => {
+                let currentRequest = { ...VALID_REQUEST };
+                delete currentRequest[parameter];
+
+                expect(() => ncat.UTMServiceRequest(currentRequest))
+                    .toThrowError(MissingRequiredQueryParameter);
+            });
+    });
+
+    it('can validate raise exceptions for non-required fields', () => {
+        let currentRequest = { ...VALID_REQUEST };
+        currentRequest['eht'] = 'not a valid float';
+
+        expect(() => ncat.UTMServiceRequest(currentRequest))
+            .toThrowError(InvalidQueryParameter);
+    });
+
+    it('should return a valid response if the required fields are included', () => {
+        return ncat.UTMServiceRequest(VALID_REQUEST).then(data => {
+            expect(data).toHaveProperty('ID');
+        });
+    });
+
+    it ('should return a rejected promise if the request is bad', () => {
+        const invalidEasting = -800000000000000;
+
+        let currentRequest = { ...VALID_REQUEST };
+        currentRequest['easting'] = invalidEasting;
+
+        return ncat.UTMServiceRequest(currentRequest).catch(error => {
+            expect(error).toBe('Invalid easting coordinate');
+        });
+    });
+});
