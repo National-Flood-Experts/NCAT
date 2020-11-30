@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import ncat from '../src/ncat';
 import { MissingRequiredQueryParameter, InvalidQueryParameter } from '../src/errors';
 
@@ -15,7 +19,7 @@ describe('Latitude-longitude-height service', () => {
                 let currentRequest = { ...VALID_REQUEST };
                 delete currentRequest[parameter];
 
-                expect(() => ncat.llhServiceRequest(currentRequest))
+                expect(() => ncat.LLHServiceRequest(currentRequest))
                     .toThrowError(MissingRequiredQueryParameter);
             });
     });
@@ -23,7 +27,25 @@ describe('Latitude-longitude-height service', () => {
     it('can validate raise exceptions for non-required fields', () => {
         let currentRequest = { ...VALID_REQUEST };
         currentRequest['eht'] = 'not a valid float';
-        expect(() => ncat.llhServiceRequest(currentRequest))
+
+        expect(() => ncat.LLHServiceRequest(currentRequest))
             .toThrowError(InvalidQueryParameter);
+    });
+
+    it('should return a valid response if the required fields are included', () => {
+        return ncat.LLHServiceRequest(VALID_REQUEST).then(data => {
+            expect(data).toHaveProperty('ID');
+        });
+    });
+
+    it ('should return a rejected promise if the request is bad', () => {
+        const invalidLatitude = -800000000000000;
+
+        let currentRequest = { ...VALID_REQUEST };
+        currentRequest['lat'] = invalidLatitude;
+
+        return ncat.LLHServiceRequest(currentRequest).catch(error => {
+            expect(error).toBe('Invalid latitude');
+        });
     });
 });
