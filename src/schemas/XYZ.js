@@ -2,15 +2,15 @@ import validators from './validators';
 
 export default {
     x: {
-        requried: true,
+        required: true,
         validator: validators.x
     },
     y: {
-        requried: true,
+        required: true,
         validator: validators.y
     },
     z: {
-        requried: true,
+        required: true,
         validator: validators.z
     },
     inDatum: {
