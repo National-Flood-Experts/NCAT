@@ -2,7 +2,7 @@ import validators from './validators';
 
 export default {
     usng: {
-        requried: true,
+        required: true,
         validator: validators.usng
     },
     inDatum: {
