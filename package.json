@@ -1,6 +1,6 @@
 {
   "name": "@nationalfloodexperts/ncat",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A JavaScript wrapper for NGS’s Coordinate Conversion and Transformation Tool (NCAT) API.",
   "main": "lib/ncat.js",
   "scripts": {
