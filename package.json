@@ -9,7 +9,8 @@
     "build:commonjs": "babel src --out-dir lib",
     "clean": "rimraf lib dist",
     "build": "npm run clean && npm run build:commonjs && npm run build:umd && npm run build:umd:min",
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "babel src --out-dir lib"
   },
   "author": "National Flood Experts",
   "license": "MIT",
