@@ -15,7 +15,7 @@ describe('LLH Service', () => {
     };
 
     it('cannot make a request without the required fields', () => {
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         Object.keys(VALID_REQUEST)
             .forEach(parameter => {
                 let currentRequest = { ...VALID_REQUEST };
@@ -27,7 +27,7 @@ describe('LLH Service', () => {
     });
 
     it('can validate raise exceptions for non-required fields', () => {
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         const key = 'eht'
         let currentRequest = { ...VALID_REQUEST };
         currentRequest[key] = 'not a valid float';
@@ -37,7 +37,7 @@ describe('LLH Service', () => {
 
     it('should return a valid response if the required fields are included', async () => {
         const axios = require('axios');
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
 
         await ncat.LLH(VALID_REQUEST).then(data => {
             expect(data).toHaveProperty('ID');
@@ -46,7 +46,7 @@ describe('LLH Service', () => {
 
     it ('should return a rejected promise if the request is bad', async () => {
         const axios = require('axios');
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         const invalidLatitude = -800000000000000;
 
         let currentRequest = { ...VALID_REQUEST };
@@ -76,7 +76,7 @@ describe('SPC Service', () => {
     };
 
     it('cannot make a request without the required fields', () => {
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         Object.keys(VALID_REQUEST)
             .forEach(parameter => {
                 let currentRequest = { ...VALID_REQUEST };
@@ -88,7 +88,7 @@ describe('SPC Service', () => {
     });
 
     it('can raise exceptions for non-required fields', async () => {
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         const key = 'eht';
         let currentRequest = { ...VALID_REQUEST };
         currentRequest[key] = 'not a valid float';
@@ -98,7 +98,7 @@ describe('SPC Service', () => {
 
     it('should return a valid response if the required fields are included', async () => {
         const axios = require('axios');
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
 
         await ncat.SPC(VALID_REQUEST).then(data => {
             expect(data).toHaveProperty('ID');
@@ -107,7 +107,7 @@ describe('SPC Service', () => {
 
     it ('should return a rejected promise if the request is bad', async () => {
         const axios = require('axios');
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         const invalidEasting = -800000000000000;
 
         let currentRequest = { ...VALID_REQUEST };
@@ -137,7 +137,7 @@ describe('UTM Service', () => {
     };
 
     it('cannot make a request without the required fields', () => {
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         Object.keys(VALID_REQUEST)
             .forEach(parameter => {
                 let currentRequest = { ...VALID_REQUEST };
@@ -149,7 +149,7 @@ describe('UTM Service', () => {
     });
 
     it('can raise exceptions for non-required fields', () => {
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         const key = 'eht';
         let currentRequest = { ...VALID_REQUEST };
         currentRequest[key] = 'not a valid float';
@@ -159,7 +159,7 @@ describe('UTM Service', () => {
 
     it('should return a valid response if the required fields are included', async () => {
         const axios = require('axios');
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
 
         await ncat.UTM(VALID_REQUEST).then(data => {
             expect(data).toHaveProperty('ID');
@@ -168,7 +168,7 @@ describe('UTM Service', () => {
 
     it ('should return a rejected promise if the request is bad', async () => {
         const axios = require('axios');
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         const invalidEasting = -800000000000000;
 
         let currentRequest = { ...VALID_REQUEST };
@@ -198,7 +198,7 @@ describe('XYZ Service', () => {
     };
 
     it('cannot make a request without the required fields', () => {
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         Object.keys(VALID_REQUEST)
             .forEach(parameter => {
                 let currentRequest = { ...VALID_REQUEST };
@@ -210,7 +210,7 @@ describe('XYZ Service', () => {
     });
 
     it('can raise exceptions for non-required fields', () => {
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         let currentRequest = { ...VALID_REQUEST };
         const key = 'a';
         currentRequest[key] = 'not a valid float';
@@ -220,7 +220,7 @@ describe('XYZ Service', () => {
 
     it('should return a valid response if the required fields are included', async () => {
         const axios = require('axios');
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
 
         await ncat.XYZ(VALID_REQUEST).then(data => {
             expect(data).toHaveProperty('ID');
@@ -229,7 +229,7 @@ describe('XYZ Service', () => {
 
     it ('should return a rejected promise if the request is bad', async () => {
         const axios = require('axios');
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         const invalidXCoordinate = -800000000000000;
 
         let currentRequest = { ...VALID_REQUEST };
@@ -257,7 +257,7 @@ describe('USNG Service', () => {
     };
 
     it('cannot make a request without the required fields', () => {
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         Object.keys(VALID_REQUEST)
             .forEach(parameter => {
                 let currentRequest = { ...VALID_REQUEST };
@@ -269,7 +269,7 @@ describe('USNG Service', () => {
     });
 
     it('can raise exceptions for non-required fields', () => {
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         let currentRequest = { ...VALID_REQUEST };
         const key = 'eht';
         currentRequest[key] = 'not a valid float';
@@ -279,7 +279,7 @@ describe('USNG Service', () => {
 
     it('should return a valid response if the required fields are included', async () => {
         const axios = require('axios');
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
 
         await ncat.USNG(VALID_REQUEST).then(data => {
             expect(data).toHaveProperty('ID');
@@ -288,7 +288,7 @@ describe('USNG Service', () => {
 
     it ('should return a rejected promise if the request is bad', async () => {
         const axios = require('axios');
-        const ncat = require('../src/ncat').default;
+        const ncat = require('../src/ncat');
         const invalidInverseFlattening = -800000000000000;
 
         let currentRequest = { ...VALID_REQUEST };

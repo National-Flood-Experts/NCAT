@@ -69,7 +69,7 @@ const USNG = function USNGServiceRequest(queryParameters) {
     return serviceRequest(queryParameters);
 }
 
-export default {
+export {
     LLH,
     SPC,
     UTM,
